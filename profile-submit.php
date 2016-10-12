@@ -38,7 +38,7 @@ if (file_exists($target_file)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
 }
-// Check file size
+// Check file size  samller than 500kB
 if ($_FILES["fileToUpload"]["size"] > 500000) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
@@ -60,9 +60,6 @@ if ($uploadOk == 0) {
         echo "Sorry, there was an error uploading your file.";
     }
 }
-echo "<br>".$target_dir."<br>";
-echo "<br>".$target_file."<br>";
-echo "<br>".$imageFileType."<br>";
 
     //insert new rows
 	$stmt = $mysqli->prepare("insert into users (name,email,age,description,pictureUrl) values (?,?,?,?,?)");
