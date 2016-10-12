@@ -8,3 +8,6 @@ Function:   1. upload name, email, age, description and profile picture
             3. display users in certain age range
 
 you should implement this within one and a half hours
+
+example website:
+http://52.88.222.70/~lizhening/module_in_class/create-profile.html
