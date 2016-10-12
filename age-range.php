@@ -26,8 +26,8 @@ div#main{
 <?php
 require "database.php";
 
-$low = htmlspecialchars($_GET['low']);
-$high = htmlspecialchars($_GET['high']);
+$low = htmlspecialchars($_POST['low']);
+$high = htmlspecialchars($_POST['high']);
 
 $stmt = $mysqli->prepare("select name, email,age,description,pictureUrl from users WHERE age BETWEEN ? and ?");
     if (!$stmt) {
@@ -36,23 +36,22 @@ $stmt = $mysqli->prepare("select name, email,age,description,pictureUrl from use
     }
 $stmt->bind_param('ss', $low,$high);
 $stmt->execute();
+$stmt->store_result();
 $stmt->bind_result($name, $email,$age,$description,$pictureUrl);
 while ($stmt->fetch()) {
     echo "<fieldset>";
 	echo "<ul>";
 	echo "<li>Name: ".htmlspecialchars($name)."</li>"."<br>";
+    echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
 	echo "<li>Email: ".htmlspecialchars($email)."</li>"."<br>";
 	echo "<li><img src='$pictureUrl' width = '300px'></li><br>";
 	echo "<li>Description: ".htmlspecialchars($description)."</li>"."<br>";
-	echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
 	echo "</ul>";
     echo "</fieldset>";
 }
 $stmt->close();
 ?>
- 
 <!-- CONTENT HERE -->
-
 <a href="show-users.php">See all Users</a>
 </div></body>
 </html>

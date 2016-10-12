@@ -56,25 +56,24 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+         //insert new rows
+            $stmt = $mysqli->prepare("insert into users (name,email,age,description,pictureUrl) values (?,?,?,?,?)");
+            if(!$stmt){
+                printf("Query Prep Failed: %s\n", $mysqli->error);
+            exit;
+            }
+
+            $stmt->bind_param('ssiss', $name, $email,$age,$description,$target_file);
+            $name = $_POST['name'];
+             $email = $_POST['email'];
+            $age = (int)$_POST['age'];
+            $description = $_POST['description'];
+  
+            $stmt->execute();
+            $stmt->close();
+             header("Location: show-users.php");
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
 }
-
-    //insert new rows
-	$stmt = $mysqli->prepare("insert into users (name,email,age,description,pictureUrl) values (?,?,?,?,?)");
-	if(!$stmt){
-		printf("Query Prep Failed: %s\n", $mysqli->error);
-	exit;
-	}
-
-	$stmt->bind_param('ssiss', $name, $email,$age,$description,$target_file);
-	$name = $_POST['name'];
-    $email = $_POST['email'];
-    $age = (int)$_POST['age'];
-    $description = $_POST['description'];
-  
-	$stmt->execute();
-	$stmt->close();
-    header("Location: show-users.php");
 ?>

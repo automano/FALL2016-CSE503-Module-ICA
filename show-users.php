@@ -36,10 +36,10 @@ while ($stmt->fetch()) {
     echo "<fieldset>";
 	echo "<ul>";
 	echo "<li>Name: ".htmlspecialchars($name)."</li>"."<br>";
+    echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
 	echo "<li>Email: ".htmlspecialchars($email)."</li>"."<br>";
 	echo "<li><img src='$pictureUrl' width = '300px'></li><br>";
 	echo "<li>Description: ".htmlspecialchars($description)."</li>"."<br>";
-	echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
 	echo "</ul>";
     echo "</fieldset>";
 }
@@ -49,8 +49,8 @@ $stmt->close();
 Search for people in this age range:
 <br>
 <form action='age-range.php' method='POST'>
-    <label>low:  <input type='number' name='low'/></label><br><br>
-    <label>high: <input type='number' name='high'/></label><br><br>
+    <label>low:  <input type='number' name='low' min='18'/></label>
+    <label>high: <input type='number' name='high' min='18'/></label><br><br>
     <input type='submit' value='Submit'/><br><br>
 </form>
  
