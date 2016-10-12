@@ -1,13 +1,13 @@
 
 CREATE DATABASE matchmaker;
-
+GRANT SELECT,INSERT,UPDATE,DELETE on matchmaker.* to module3@'localhost';
 
 CREATE TABLE users(
 id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT,
 name VARCHAR(60) NOT NULL,
 email VARCHAR(100) NOT NULL,
 pictureUrl VARCHAR(250) NOT NULL,
-description TINYTEXT,
+description TINYTEXT NOT NULL,
 age TINYINT UNSIGNED NOT NULL,
 posted datetime NOT NULL,
 PRIMARY KEY (id),

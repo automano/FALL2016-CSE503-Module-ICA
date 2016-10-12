@@ -38,8 +38,7 @@ echo "Email: ".$email;
 echo "age: ".$age;
 echo "Description: ".$description;
 echo "Profile picture: ";
-echo "<img src=".$pictureUrl" width=300px/>";
-
+echo "<img src=".$pictureUrl." width=300px/>";
 ?>
 
 <form action='age-range.php' method='POST'>
