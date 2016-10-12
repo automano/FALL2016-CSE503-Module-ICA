@@ -44,7 +44,7 @@ while ($stmt->fetch()) {
 	echo "<li>Name: ".htmlspecialchars($name)."</li>"."<br>";
     echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
 	echo "<li>Email: ".htmlspecialchars($email)."</li>"."<br>";
-	echo "<li><img src='$pictureUrl' width = '300px'></li><br>";
+	echo "<img src='$pictureUrl' width = '300px'><br>";
 	echo "<li>Description: ".htmlspecialchars($description)."</li>"."<br>";
 	echo "</ul>";
     echo "</fieldset>";

@@ -2,20 +2,21 @@
 require "database.php";
 //error description
 if(!isset($_POST['name'])){
-    echo "Please input your name!";
+    echo "Please input your name!<br>";
 }
 if(!isset($_POST['email'])){
-    echo "Please input your email!";
+    echo "Please input your email!<br>";
 }
 if(!isset($_POST['age'])){
-    echo "Please input your age!";
+    echo "Please input your age!<br>";
 }
 if(!isset($_POST['description'])){
-    echo "Please input your description!";
+    echo "Please input your description!<br>";
 }
 if(!isset($_FILES['fileToUpload'])){
-    echo "Please upload your profile picture!";
+    echo "Please upload your profile picture!<br>";
 }
+
 //http://www.w3schools.com/php/php_file_upload.asp
 $target_dir = "uploads/";
 $filename = basename($_FILES['fileToUpload']['name']);
@@ -23,7 +24,7 @@ $target_file = $target_dir.$filename;
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if image file is a actual image or fake image
-if(isset($_POST['submit'])) {
+if(isset($_POST['submit'])&&isset($_FILES['fileToUpload'])){
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
         echo "File is an image - " . $check["mime"] . ".";
