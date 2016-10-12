@@ -25,7 +25,7 @@ div#main{
 <h1>All Users</h1>
 <?php
 require "database.php";
-$stmt = $mysqli->prepare("select name, email,pictureUrl,description, age from users");
+$stmt = $mysqli->prepare("select name, email,age,description,pictureUrl from users");
     if (!$stmt) {
         printf("Query Prep Failed: %s\n", $mysqli->error);
     exit;
@@ -35,17 +35,19 @@ $stmt->bind_result($name, $email,$age,$description,$pictureUrl);
 while ($stmt->fetch()) {
     echo "<fieldset>";
 	echo "<ul>";
-	echo "<li>".htmlentities($name)."</li>"."<br>";
-	echo "<li>".htmlentities($email)."</li>"."<br>";
-	echo "<li><img src='\htmlentities($pictureUrl)' width = '300px'></li><br>";
-	echo "<li>".htmlentities($description)."</li>"."<br>";
-	echo "<li>".htmlentities($age)."</li>"."<br>";
+	echo "<li>Name: ".htmlspecialchars($name)."</li>"."<br>";
+	echo "<li>Email: ".htmlspecialchars($email)."</li>"."<br>";
+	echo "<li><img src='$pictureUrl' width = '300px'></li><br>";
+	echo "<li>Description: ".htmlspecialchars($description)."</li>"."<br>";
+	echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
 	echo "</ul>";
     echo "</fieldset>";
 }
 $stmt->close();
 ?>
-
+<br><br>
+Search for people in this age range:
+<br>
 <form action='age-range.php' method='POST'>
     <label>low:  <input type='number' name='low'/></label><br><br>
     <label>high: <input type='number' name='high'/></label><br><br>

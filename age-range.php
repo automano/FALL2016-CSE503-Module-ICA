@@ -23,10 +23,36 @@ div#main{
 </head>
 <body><div id="main">
 <h1>Users in Age Range</h1>
+<?php
+require "database.php";
 
+$low = htmlspecialchars($_GET['low']);
+$high = htmlspecialchars($_GET['high']);
+
+$stmt = $mysqli->prepare("select name, email,age,description,pictureUrl from users WHERE age BETWEEN ? and ?");
+    if (!$stmt) {
+        printf("Query Prep Failed: %s\n", $mysqli->error);
+    exit;
+    }
+$stmt->bind_param('ss', $low,$high);
+$stmt->execute();
+$stmt->bind_result($name, $email,$age,$description,$pictureUrl);
+while ($stmt->fetch()) {
+    echo "<fieldset>";
+	echo "<ul>";
+	echo "<li>Name: ".htmlspecialchars($name)."</li>"."<br>";
+	echo "<li>Email: ".htmlspecialchars($email)."</li>"."<br>";
+	echo "<li><img src='$pictureUrl' width = '300px'></li><br>";
+	echo "<li>Description: ".htmlspecialchars($description)."</li>"."<br>";
+	echo "<li>Age: ".htmlspecialchars($age)."</li>"."<br>";
+	echo "</ul>";
+    echo "</fieldset>";
+}
+$stmt->close();
+?>
  
 <!-- CONTENT HERE -->
 
-<a hre="show-users.php">See all Users</a>
+<a href="show-users.php">See all Users</a>
 </div></body>
 </html>
