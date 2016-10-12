@@ -1,4 +1,5 @@
 <?php
+require "database.php";
 //error description
 if(!isset($_POST['name'])){
     echo "Please input your name!";
@@ -12,9 +13,13 @@ if(!isset($_POST['age'])){
 if(!isset($_POST['description'])){
     echo "Please input your description!";
 }
+if(!isset($_FILES['fileToUpload'])){
+    echo "Please upload your profile picture!";
+}
 //http://www.w3schools.com/php/php_file_upload.asp
-$target_dir = "/uploads/";
-$target_file = $target_dir.basename($_FILES["fileToUpload"]["name"]);
+$target_dir = "uploads/";
+$filename = basename($_FILES['fileToUpload']['name']);
+$target_file = $target_dir.$filename;
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 // Check if image file is a actual image or fake image
@@ -49,7 +54,7 @@ if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+    if (move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $target_file)) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
@@ -58,8 +63,7 @@ if ($uploadOk == 0) {
 echo "<br>".$target_dir."<br>";
 echo "<br>".$target_file."<br>";
 echo "<br>".$imageFileType."<br>";
-    $pictureUrl = sprintf("uploads/%s",$filename);
-    
+
     //insert new rows
 	$stmt = $mysqli->prepare("insert into users (name,email,age,description,pictureUrl) values (?,?,?,?,?)");
 	if(!$stmt){
@@ -67,12 +71,12 @@ echo "<br>".$imageFileType."<br>";
 	exit;
 	}
 
-	$stmt->bind_param('ssiss', $name, $email,$age,$description,$pictureUrl);
+	$stmt->bind_param('ssiss', $name, $email,$age,$description,$target_file);
 	$name = $_POST['name'];
     $email = $_POST['email'];
-    $age = int($_POST['age']);
+    $age = (int)$_POST['age'];
     $description = $_POST['description'];
-    $pictureUrl = sprintf("uploads/%s",$filename); 
+  
 	$stmt->execute();
 	$stmt->close();
     header("Location: show-users.php");

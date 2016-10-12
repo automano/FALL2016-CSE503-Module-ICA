@@ -9,7 +9,7 @@ email VARCHAR(100) NOT NULL,
 pictureUrl VARCHAR(250) NOT NULL,
 description TINYTEXT NOT NULL,
 age TINYINT UNSIGNED NOT NULL,
-posted datetime NOT NULL,
+posted TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 PRIMARY KEY (id),
 UNIQUE key emailaddress (email)
 ) engine = INNODB DEFAULT character SET = utf8 COLLATE = utf8_general_ci;

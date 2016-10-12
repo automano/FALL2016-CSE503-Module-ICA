@@ -3,6 +3,10 @@
 <meta charset="utf-8"/>
 <title>Matches</title>
 <style type="text/css">
+h1{
+     text-decoration: underline;
+     text-align: center;
+}
 body{
 	width: 760px; /* how wide to make your web page */
 	background-color: teal; /* what color to make the background */
@@ -20,25 +24,26 @@ div#main{
 <body><div id="main">
 <h1>All Users</h1>
 <?php
-$stmt = $mysqli->prepare("SELECT name,email,age,description,pictureUrl from users ");
+require "database.php";
+$stmt = $mysqli->prepare("select name, email,pictureUrl,description, age from users");
     if (!$stmt) {
         printf("Query Prep Failed: %s\n", $mysqli->error);
     exit;
     }
-$stmt->bind_param('ssiss', $name, $email,$age,$description,$pictureUrl);
 $stmt->execute();
-$stmt->store_result();
 $stmt->bind_result($name, $email,$age,$description,$pictureUrl);
-$stmt->fetch();
+while ($stmt->fetch()) {
+    echo "<fieldset>";
+	echo "<ul>";
+	echo "<li>".htmlentities($name)."</li>"."<br>";
+	echo "<li>".htmlentities($email)."</li>"."<br>";
+	echo "<li><img src='\htmlentities($pictureUrl)' width = '300px'></li><br>";
+	echo "<li>".htmlentities($description)."</li>"."<br>";
+	echo "<li>".htmlentities($age)."</li>"."<br>";
+	echo "</ul>";
+    echo "</fieldset>";
+}
 $stmt->close();
-
-echo "-------------------";
-echo "Name: ".$name;
-echo "Email: ".$email;
-echo "age: ".$age;
-echo "Description: ".$description;
-echo "Profile picture: ";
-echo "<img src=".$pictureUrl." width=300px/>";
 ?>
 
 <form action='age-range.php' method='POST'>

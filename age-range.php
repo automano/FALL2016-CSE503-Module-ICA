@@ -3,6 +3,10 @@
 <meta charset="utf-8"/>
 <title>Macthmaking Site - User by Age</title>
 <style type="text/css">
+h1{
+     text-decoration: underline;
+     text-align: center;
+}
 body{
 	width: 760px; /* how wide to make your web page */
 	background-color: teal; /* what color to make the background */

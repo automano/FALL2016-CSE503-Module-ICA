@@ -23,17 +23,16 @@ div#main{
 </head>
 <body><div id="main">
 <h1>Create Profile</h1>
-<form action='profile-submit.php' method='POST'>
+<form action='profile-submit.php' method='POST' enctype='multipart/form-data'>
   <label>Name:  <input type='text' name='name'/></label><br><br>
   <label>Email: <input type='text' name='email'/></label><br><br>
   <label>Age:   <input type="number" name="age" step="1" min="18"/></label><br><br>
-  <label>text:<br>  <textarea cols="40" rows="20" name="description"></textarea></label><br><br>
-  <input type='hidden' name='MAX_FILE_SIZE' value='20000000'/>
-  <label for='fileToUpload_input'>Choose a profile picture upload:</label>
-  <label><input type='file' name='fileToUpload' id='fileToUpload_input'/></label><br><br>
-  <input type='submit' name ='submit' value='Submit'/><br><br>
+  <label>Description:<br>  <textarea cols="40" rows="20" name="description"></textarea></label><br><br>
+  
+  <input type="hidden" name="MAX_FILE_SIZE" value="20000000" />
+  <label for="uploadfile_input">Upload your profile picture:</label> <input name="fileToUpload" type="file" id="uploadfile_input" /><br><br>
+  <input type="submit" name="submit" value="Submit" />
 </form>
- 
 <!-- CONTENT HERE -->
  
 </div></body>
