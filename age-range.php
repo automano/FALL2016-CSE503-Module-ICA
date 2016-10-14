@@ -37,7 +37,7 @@ $stmt = $mysqli->prepare("select name, email,age,description,pictureUrl from use
 $stmt->bind_param('ss', $low,$high);
 $stmt->execute();
 $stmt->store_result();
-$stmt->bind_result($name, $email,$age,$description,$pictureUrl);
+$stmt->bind_result($name, $email,$age,$dscription,$pictureUrl);
 while ($stmt->fetch()) {
     echo "<fieldset>";
 	echo "<ul>";

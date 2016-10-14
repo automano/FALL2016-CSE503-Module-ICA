@@ -3,18 +3,23 @@ require "database.php";
 //error description
 if(!isset($_POST['name'])){
     echo "Please input your name!<br>";
+    exit;
 }
 if(!isset($_POST['email'])){
     echo "Please input your email!<br>";
+    exit;
 }
 if(!isset($_POST['age'])){
     echo "Please input your age!<br>";
+    exit;
 }
 if(!isset($_POST['description'])){
     echo "Please input your description!<br>";
+    exit;
 }
 if(!isset($_FILES['fileToUpload'])){
     echo "Please upload your profile picture!<br>";
+    exit;
 }
 
 //http://www.w3schools.com/php/php_file_upload.asp
